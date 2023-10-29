@@ -5,6 +5,7 @@ var points_dict: PackedVector2Array = []
 var tile_map: TileMap
 
 
+# Setup the tilemap for pathfinding
 func setup_hex_grid(passed_tile_map: TileMap) -> void:
 	tile_map = passed_tile_map
 	var used_cells = tile_map.get_used_cells(0)
@@ -15,6 +16,7 @@ func setup_hex_grid(passed_tile_map: TileMap) -> void:
 		connect_point(cell.x, cell.y)
 
 
+# Connect a point with all 6 neighboring cells
 func connect_point(x: int, y:int) -> void:
 	var center = points_dict.find(Vector2(x, y))
 	
@@ -61,5 +63,6 @@ func connect_point(x: int, y:int) -> void:
 				connect_points(center, bottom_left)
 
 
+# Returns the id of a cell
 func coords_to_id(coords: Vector2i) -> int:
 	return points_dict.find(coords)
