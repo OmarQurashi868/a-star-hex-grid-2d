@@ -2,6 +2,8 @@
 Custom class implementation of AStar2D for hexagonal grids in the Godot game engine.
 Minimum setup and supports both horizontal and vertical offset.
 Currently only supports setting the whole map as walkable but shouldn't be too hard to implement a layer-based system or something similar (right?)
+
+![AStarHexGrid2D](https://github.com/OmarQurashi868/a-star-hex-grid-2d/assets/96021536/49f3e314-5f54-4e63-a6f0-469ba06043ce)
 # Usage
 1. Download the class .gd file and place anywhere inside your Godot project.
 2. Instance the class in a script where you have a reference to your TileMap.
