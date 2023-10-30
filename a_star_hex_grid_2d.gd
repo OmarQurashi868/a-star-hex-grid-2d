@@ -6,9 +6,9 @@ var tile_map: TileMap
 
 
 # Setup the tilemap for pathfinding
-func setup_hex_grid(passed_tile_map: TileMap) -> void:
+func setup_hex_grid(passed_tile_map: TileMap, passed_layer: int) -> void:
 	tile_map = passed_tile_map
-	var used_cells = tile_map.get_used_cells(0)
+	var used_cells = tile_map.get_used_cells(passed_layer)
 	for cell in used_cells:
 		var current_id = points_dict.size()
 		add_point(current_id, tile_map.map_to_local(cell))
