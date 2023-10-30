@@ -9,14 +9,15 @@ Currently only supports setting the whole map as walkable but shouldn't be too h
 2. Instance the class in a script where you have a reference to your TileMap.
 ```gdscript
 @onready var tile_map: TileMap = $TileMap
+var tile_layer: int = 0
 var astar_hex: AStarHexGrid2D
 
 func _ready():
 	astar_hex = AStarHexGrid2D.new()
 ```
-3. Call the `setup_hex_grid()` function passing the TileMap as a parameter.
+3. Call the `setup_hex_grid()` function passing the TileMap and layer as a parameters.
 ```gdscript
-astar_hex.setup_hex_grid(tile_map)
+astar_hex.setup_hex_grid(tile_map, tile_layer)
 ```
 4. Your grid is set up now, to get the path from one point to another you'll first need to get the id's of the points using the function `coords_to_id` which takes a Vector2i (map coordinates of the cell) and returns the point id for the AStar2D class.
 ```gdscript
@@ -39,8 +40,8 @@ An array containing all the points in the pathfinding grid stored as a Vector2i 
 The TileMap assigned for the pathfinding grid.
 
 ## Methods
-### void setup_hex_grid ( TileMap passed_tile_map )
-Assigns `tile_map` to the `passed_tile_map` and loops over all the used cells in the tile map adding them to the pathfinding grid and connecting it to its neighbors using `connect_point()`.
+### void setup_hex_grid ( TileMap passed_tile_map, int passed_tile_layer )
+Assigns `tile_map` to the `passed_tile_map` and loops over all the used cells in the passed layer in the tile map adding them to the pathfinding grid and connecting it to its neighbors using `connect_point()`.
 
 ### void connect_point (int x, int y)
 Connects all 6 neighboring cells to the center cell at (x, y) in map coordinates in the pathfinding grid to enable pathfinding between them freely. This function is called automatically in the class.
