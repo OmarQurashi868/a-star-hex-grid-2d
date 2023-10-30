@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var game: Node2D = $".."
 @onready var tile_map: TileMap = $"../TileMap"
+@export var move_speed: float = 5.0
 var path: Array = []
 var is_moving: bool = false
 
@@ -18,7 +19,7 @@ func _process(_delta):
 		set_line2d_points()
 		
 		is_moving = true
-		global_position = global_position.move_toward(path.front(), 5)
+		global_position = global_position.move_toward(path.front(), move_speed)
 		
 		if position == path.front():
 			is_moving = false
