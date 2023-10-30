@@ -18,7 +18,7 @@ func _ready():
 ```gdscript
 astar_hex.setup_hex_grid(tile_map)
 ```
-4. Your grid is setup now, to get the path from one point to another you'll first need to get the id's of the points using the function `coords_to_id` which takes a Vector2i (map coordinates of the cell) and returns the point id for the AStar2D class.
+4. Your grid is set up now, to get the path from one point to another you'll first need to get the id's of the points using the function `coords_to_id` which takes a Vector2i (map coordinates of the cell) and returns the point id for the AStar2D class.
 ```gdscript
 var from = tilemap.local_to_map(player.position)
 var to = tilemap.local_to_map(get_global_mouse_position())
