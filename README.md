@@ -11,6 +11,9 @@ The 2 disconnected points that need to be connected to the center hexagonal cell
 I have basically added a function that connects a point to its neighboring 6 points using the logic above that's called for each (non-solid) point.
 
 # Usage
+
+## Setting up the grid
+
 1. Download the class .gd file and place anywhere inside your Godot project.
 2. Instance the class in a script where you have a reference to your TileMap.
 ```gdscript
