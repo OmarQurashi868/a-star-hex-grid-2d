@@ -3,6 +3,7 @@ class_name AStarHexGrid2D
 
 var points_arr: PackedVector2Array = []
 var tile_map: TileMap
+var solid_data_name: String = "solid"
 
 
 # Setup the tilemap for pathfinding
@@ -11,9 +12,8 @@ func setup_hex_grid(passed_tile_map: TileMap, passed_layer: int) -> void:
 	var used_cells = tile_map.get_used_cells(passed_layer)
 	
 	for cell in used_cells:
-		var solid_data_layer = tile_map.tile_set.get_custom_data_layer_by_name("solid")
 		var tile_data = tile_map.get_cell_tile_data(passed_layer, cell)
-		var is_tile_solid = tile_data.get_custom_data_by_layer_id(solid_data_layer)
+		var is_tile_solid = tile_data.get_custom_data(solid_data_name)
 		
 		if not is_tile_solid:
 			add_hex_point(cell)
