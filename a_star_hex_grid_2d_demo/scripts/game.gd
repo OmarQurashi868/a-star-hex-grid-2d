@@ -12,11 +12,8 @@ func _ready():
 
 
 func get_nav(from: Vector2, to: Vector2) -> PackedVector2Array:
-	var from_map = tile_map.local_to_map(from)
-	var to_map = tile_map.local_to_map(to)
+	var from_point = tile_map.local_to_map(from)
+	var to_point = tile_map.local_to_map(to)
 	
-	var from_id = astar_hex.coords_to_id(from_map)
-	var to_id = astar_hex.coords_to_id(to_map)
-	
-	var path = astar_hex.get_point_path(from_id, to_id)
+	var path = astar_hex.get_path(from_point, to_point)
 	return path
