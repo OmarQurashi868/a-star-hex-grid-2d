@@ -36,7 +36,7 @@ var path = astar_hex.get_point_path(from_point, to_point)
 ```
 
 ## Setting tiles as obstacles/solid
-To set a specific tile in the tile set as solid/obstacle (i.e. the pathfinder navigate through it) you need to add a custom data layer bool named "solid" and enable it for the solid tiles in the tile set
+To set a specific tile in the tile set as solid/obstacle (i.e. the pathfinder can't navigate through it) you need to add a custom data layer bool named "solid" in the tile set and enable it for the solid tiles in the tile set.
 
 ![image](https://github.com/OmarQurashi868/a-star-hex-grid-2d/assets/96021536/43c84f83-8f62-4bee-94f2-d2722c9a41b8)
 ![image](https://github.com/OmarQurashi868/a-star-hex-grid-2d/assets/96021536/aaf30572-c8be-433c-afbc-f7b75dbf465a)
