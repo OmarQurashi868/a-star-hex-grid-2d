@@ -43,25 +43,25 @@ To set a specific tile in the tile set as solid/obstacle (i.e. the pathfinder ca
 
 # Docs
 ## Properties (you shouldn't need to touch any of these)
-### PackedVector2Array points_arr
+### _PackedVector2Array_ points_arr
 An array containing all the points in the pathfinding grid stored as Vector2's of the map coordinates where the index is the point id in the grid.
 
-### TileMap tile_map
+### _TileMap_ tile_map
 The TileMap assigned for the pathfinding grid.
 
 ## Methods
-### void setup_hex_grid ( TileMap passed_tile_map, int passed_tile_layer )
+### _void_ setup_hex_grid ( _TileMap_ passed_tile_map, _int_ passed_tile_layer )
 Assigns `tile_map` to the `passed_tile_map` and loops over all the used cells in the passed layer in the tile map adding them to the pathfinding grid (if they are not solid) using `add_hex_point()` and connecting it to its neighbors using `connect_hex_point()`.
 
-### void add_hex_point ( Vector2i cell )
+### _void_ add_hex_point ( _Vector2i_ cell )
 Adds the passed cell to the pathfinding grid and appends it to `points_arr`.
 
-### void connect_hex_point (Vector2i cell)
+### _void_ connect_hex_point ( _Vector2i_ cell )
 Connects all 6 neighboring cells to the passed center cell in map coordinates in the pathfinding grid to enable pathfinding between them freely. It uses a simple even/odd logic to decide whether to add the top-left and bottom-left cells or the top-right and bottom-right cells respectively (for horizontal offset, vertical offset uses top-right and top_left vs bottom_right and bottom_left).
 This function is called automatically in the class for every non-solid point.
 
-### int coords_to_id (Vector2i coords)
+### _int_ coords_to_id ( _Vector2i_ coords )
 Returns the point id (also the index in `points_arr`) of the cell with the given map coordinates.
 
-### PackedVector2Array get_path ( Vector2i from_point, Vector2i to_point )
+### _PackedVector2Array_ get_path ( _Vector2i_ from_point, _Vector2i_ to_point )
 Returns the pathfound path from `from_point` to `to_point` as a PackedVector2Array of game (not map) coordinates where the first element is the first step and the last element is the target at `to_point` (automatically gets the id's for the points).
