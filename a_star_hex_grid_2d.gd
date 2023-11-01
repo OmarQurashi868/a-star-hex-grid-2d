@@ -1,7 +1,7 @@
 extends AStar2D
 class_name AStarHexGrid2D
 
-var points_dict: PackedVector2Array = []
+var points_arr: PackedVector2Array = []
 var tile_map: TileMap
 
 
@@ -9,32 +9,40 @@ var tile_map: TileMap
 func setup_hex_grid(passed_tile_map: TileMap, passed_layer: int) -> void:
 	tile_map = passed_tile_map
 	var used_cells = tile_map.get_used_cells(passed_layer)
+	
 	for cell in used_cells:
-		var current_id = points_dict.size()
-		
 		var solid_data_layer = tile_map.tile_set.get_custom_data_layer_by_name("solid")
 		var tile_data = tile_map.get_cell_tile_data(passed_layer, cell)
 		var is_tile_solid = tile_data.get_custom_data_by_layer_id(solid_data_layer)
 		
 		if not is_tile_solid:
-			add_point(current_id, tile_map.map_to_local(cell))
-			points_dict.append(cell)
-			connect_point(cell.x, cell.y)
+			add_hex_point(cell)
+			connect_hex_point(cell)
+
+
+# Add point to the pathfinding grid and to the array
+func add_hex_point(cell) -> void:
+	var current_id = points_arr.size()
+	add_point(current_id, tile_map.map_to_local(cell))
+	points_arr.append(cell)
 
 
 # Connect a point with all 6 neighboring cells
-func connect_point(x: int, y:int) -> void:
-	var center = points_dict.find(Vector2(x, y))
+func connect_hex_point(cell: Vector2i) -> void:
+	var x = cell.x
+	var y = cell.y
 	
-	var top = points_dict.find(Vector2(x, y - 1))
-	var right = points_dict.find(Vector2(x + 1, y))
-	var bottom = points_dict.find(Vector2(x, y + 1))
-	var left = points_dict.find(Vector2(x - 1, y))
+	var center = points_arr.find(Vector2(x, y))
 	
-	var top_right = points_dict.find(Vector2(x + 1, y - 1))
-	var top_left = points_dict.find(Vector2(x - 1, y - 1))
-	var bottom_right = points_dict.find(Vector2(x + 1, y + 1))
-	var bottom_left = points_dict.find(Vector2(x - 1, y + 1))
+	var top = points_arr.find(Vector2(x, y - 1))
+	var right = points_arr.find(Vector2(x + 1, y))
+	var bottom = points_arr.find(Vector2(x, y + 1))
+	var left = points_arr.find(Vector2(x - 1, y))
+	
+	var top_right = points_arr.find(Vector2(x + 1, y - 1))
+	var top_left = points_arr.find(Vector2(x - 1, y - 1))
+	var bottom_right = points_arr.find(Vector2(x + 1, y + 1))
+	var bottom_left = points_arr.find(Vector2(x - 1, y + 1))
 	
 	if has_point(top):
 		connect_points(center, top)
@@ -71,4 +79,12 @@ func connect_point(x: int, y:int) -> void:
 
 # Returns the id of a cell
 func coords_to_id(coords: Vector2i) -> int:
-	return points_dict.find(coords)
+	return points_arr.find(coords)
+
+
+# Returns the pathfound path from `from_point` to `to_point`
+func get_path(from_point: Vector2i, to_point: Vector2i) -> PackedVector2Array:
+	var from_id = coords_to_id(from_point)
+	var to_id = coords_to_id(to_point)
+	
+	return get_point_path(from_id, to_id)
