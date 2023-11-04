@@ -33,9 +33,9 @@ astar_hex.setup_hex_grid(tile_map, tile_layer)
 var from_point = tile_map.local_to_map(player.position)
 var to_point = tile_map.local_to_map(get_global_mouse_position())
 ```
-5. Then you just call the function `get_point_path()` passing in the map coordinates of the `from` and `to` points which returns a PackedVector2Array containing the path from `from_point` to `to_point` in game (not map) coordinates.
+5. Then you just call the function `get_path()` passing in the map coordinates of the `from` and `to` points which returns a PackedVector2Array containing the path from `from_point` to `to_point` in game (not map) coordinates.
 ```gdscript
-var path = astar_hex.get_point_path(from_point, to_point)
+var path = astar_hex.get_path(from_point, to_point)
 ```
 
 ## Setting tiles as obstacles/solid
