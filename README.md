@@ -12,7 +12,7 @@ I have basically added a function that connects a point to its neighboring 6 poi
 
 # Usage
 
-## Setting up the grid
+## Setting up the grid & getting paths
 
 1. Download the class .gd file and place anywhere inside your Godot project.
 2. Instance the class in a script where you have a reference to your TileMap.
@@ -28,12 +28,12 @@ func _ready():
 ```gdscript
 astar_hex.setup_hex_grid(tile_map, tile_layer)
 ```
-4. Your grid is set up now, to get the path from one point to another you'll need to get the map coordinates of the points using the built-in function `tile_map.local_to_map(point)`.
+4. Your grid is set up now, to get the path from one point to another you'll need to get the map coordinates of the points using the function built into TileMap `tile_map.local_to_map(point)`.
 ```gdscript
 var from_point = tile_map.local_to_map(player.position)
 var to_point = tile_map.local_to_map(get_global_mouse_position())
 ```
-5. Then you just call the function `get_path()` passing in the map coordinates of the `from` and `to` points which returns a PackedVector2Array containing the cell path from `from_point` to `to_point` in game (not map) coordinates.
+5. Then you just call the function `get_point_path()` passing in the map coordinates of the `from` and `to` points which returns a PackedVector2Array containing the path from `from_point` to `to_point` in game (not map) coordinates.
 ```gdscript
 var path = astar_hex.get_point_path(from_point, to_point)
 ```
